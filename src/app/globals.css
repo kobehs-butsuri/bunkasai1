@@ -30,7 +30,7 @@
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
-    --radius: 0rem;
+    --radius: 0.75rem;
     --sidebar: #f5f1ed;
     --sidebar-foreground: #1a1410;
     --sidebar-primary: #2d2420;
@@ -87,15 +87,45 @@
 @layer base {
     * {
         @apply border-border outline-ring/50;
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        border-color: transparent !important;
+        color: #111 !important;
     }
     html {
         scrollbar-gutter: stable;
         overflow-y: scroll;
+        background: #fff !important;
     }
     body {
         @apply bg-background text-foreground;
         overflow-wrap: anywhere;
-        line-break: strict;;
+        line-break: strict;
+        background: #fff !important;
+        color: #111 !important;
+    }
+    :focus-visible {
+        outline: 2px solid #111 !important;
+        outline-offset: 3px;
+    }
+    .cinematic-transition-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        width: 100vw;
+        height: 100dvh;
+        pointer-events: none;
+    }
+    .timetable-scope,
+    .timetable-scope * {
+        background-color: revert-layer !important;
+        background-image: revert-layer !important;
+        box-shadow: revert-layer !important;
+        text-shadow: revert-layer !important;
+        border-color: revert-layer !important;
+        color: revert-layer !important;
     }
 }
 
