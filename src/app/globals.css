@@ -170,3 +170,116 @@
         display: none; /* Chrome, Safari, Opera */
     }
 }
+
+/* 遷移まわりの演出レイヤー(右端のレール・円の中の章バッジ)。キャンバス(z-30)とヘッダー(z-40)の間に置く。 */
+.fx-rail {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    z-index: 35;
+    width: 36px;
+    height: 220px;
+    margin-top: -110px;
+    pointer-events: none;
+}
+
+.fx-badge {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    pointer-events: none;
+}
+
+.fx-badge-anchor {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+@media (max-width: 767px) {
+    .fx-rail {
+        right: 6px;
+    }
+    .fx-rail text {
+        display: none;
+    }
+}
+
+/* SCROLL の合図(ホームのみ)。ページ送り式でスクロールバーが無いので、最初の操作の手がかりになる。 */
+.fx-cue {
+    position: fixed;
+    right: 22px;
+    bottom: 26px;
+    z-index: 35;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.fx-cue-label {
+    writing-mode: vertical-rl;
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    opacity: 0.6;
+}
+
+@keyframes fx-cue-run {
+    0% { stroke-dashoffset: 18; }
+    100% { stroke-dashoffset: -56; }
+}
+
+.fx-cue .run {
+    stroke-dasharray: 18 200;
+    animation: fx-cue-run 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* 遷移のたびに現れる四隅の見出しマークとキャプション。 */
+.fx-frame {
+    position: fixed;
+    inset: 0;
+    z-index: 34;
+    pointer-events: none;
+}
+
+.fx-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    opacity: 0;
+}
+
+.fx-corner.tl { left: 16px; top: 78px; transform-origin: 0 0; }
+.fx-corner.tr { right: 16px; top: 78px; transform-origin: 100% 0; }
+.fx-corner.bl { left: 16px; bottom: 78px; transform-origin: 0 100%; }
+.fx-corner.br { right: 16px; bottom: 78px; transform-origin: 100% 100%; }
+.fx-corner.tr svg { transform: scaleX(-1); }
+.fx-corner.bl svg { transform: scaleY(-1); }
+.fx-corner.br svg { transform: scale(-1, -1); }
+
+.fx-caption {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 76px;
+    z-index: 35;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.34em;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .fx-corner.tl, .fx-corner.tr { top: 94px; }
+    .fx-corner.bl, .fx-corner.br { bottom: 18px; }
+    .fx-caption { bottom: 22px; }
+}
+
+@media (max-width: 767px) {
+    .fx-cue {
+        right: 14px;
+        bottom: 82px;
+    }
+}
